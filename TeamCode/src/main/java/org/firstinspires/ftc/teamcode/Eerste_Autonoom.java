@@ -27,12 +27,14 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.robotcontroller.external.samples;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 
 /**
  * This file illustrates the concept of driving a path based on time.
@@ -55,15 +57,16 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Pushbot: Auto Drive By Time", group="Pushbot")
-@Disabled
-public class PushbotAutoDriveByTime_Linear extends LinearOpMode {
+@Autonomous(name="Autonoom: rechtdoor rijden", group="Autonoom")
+public class Eerste_Autonoom extends LinearOpMode {
 
     /* Declare OpMode members. */
-    HardwarePushbot         robot   = new HardwarePushbot();   // Use a Pushbot's hardware
+    Autonoom         robot   = new Autonoom();   // Use a Pushbot's hardware
     private ElapsedTime     runtime = new ElapsedTime();
 
 
+    static final double     FORWARD_SPEED = 0.6;
+    static final double     TURN_SPEED    = 0.5;
 
     @Override
     public void runOpMode() {
@@ -80,14 +83,20 @@ public class PushbotAutoDriveByTime_Linear extends LinearOpMode {
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
+        DriveForward(.5f);
+        sleep(500);
 
-        // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
 
-        //Drive forward
-        robot.LeftMotor.setPower(0.5);
+
+
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
         sleep(1000);
+    }
+    public void DriveForward(float Power){
+        // -1 < Power < 1
+        robot.motorLeft.setPower(Power);
+        robot.motorRight.setPower(Power);
     }
 }
